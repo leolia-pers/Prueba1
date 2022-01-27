@@ -9,6 +9,11 @@ pipeline {
        stage("Etapa 1") {
            steps { // Hacemos las llamadas a los plugins
                sh "echo Soy la etapa 1" // Llamada al plugin que ejecuta una shell
+               sh "echo Sigo" // Llamada al plugin que ejecuta una shell
+               sh "echo Sigo" // Llamada al plugin que ejecuta una shell
+               sh "echo Sigo" // Llamada al plugin que ejecuta una shell
+               sh "echo Sigo" // Llamada al plugin que ejecuta una shell
+               sh "echo Salgo de la etapa 1" // Llamada al plugin que ejecuta una shell
            }
        }
        stage("Etapa 2") {
