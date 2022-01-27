@@ -47,6 +47,7 @@ pipeline {
                           sh "echo Pero acabó con error" 
                        }
                    }
+               }
                stage("Etapa 2.2") {
                    steps {
                        sh """
@@ -70,6 +71,7 @@ pipeline {
        }
     }
     }
+
    post {
        always { // Post tareas que deben ejecutarse siempre
           sh "echo Acabaron todas las etapas" 
