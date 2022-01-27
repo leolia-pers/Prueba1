@@ -28,7 +28,7 @@ pipeline {
            }
        }
        stage("Etapa 2") {
-           stages {
+           parallel {
                stage("Etapa 2.1") {
                    steps {
                        sh """
