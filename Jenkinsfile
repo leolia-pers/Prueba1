@@ -69,7 +69,7 @@ pipeline {
            }
        }
     }
-    
+    }
    post {
        always { // Post tareas que deben ejecutarse siempre
           sh "echo Acabaron todas las etapas" 
