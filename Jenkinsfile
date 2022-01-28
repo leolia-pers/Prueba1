@@ -10,9 +10,11 @@ pipeline {
                 sh "mvn package"
             }
             post {
-                archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
-                junit 'target/surefire-reports/*.xml'
-                cleanWs deleteDirs: true, patterns: [[pattern: 'target', type: 'INCLUDE']]
+                always {
+                    archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
+                    junit 'target/surefire-reports/*.xml'
+                    cleanWs deleteDirs: true, patterns: [[pattern: 'target', type: 'INCLUDE']]
+                }
             }
         }
     }
