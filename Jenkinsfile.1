@@ -24,11 +24,13 @@ pipeline {
         }
         stage("SonarQube") {
             steps {
+                withSonarQubeEnv('sonarqube') {
                 sh """
                 mvn sonar:sonar \
-                -Dsonar.host.url=http:\\172.31.4.141:8081 \
+                -Dsonar.host.url=http://172.31.4.141:8081 \
                 -Dsonar.login=62ae97410457fcefbab1ecb1f8154158bc62bd80 \
                 """
+                }
             }
         }
     }
