@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage("Compilacion") {
+            steps {
+                sh "mvn compile"
+            }
+        }
+        stage("Compilacion de pruebas") {
+            steps {
+                sh "mvn test-compile"
+            }
+        }
+        stage("Pruebas") {
+            steps {
+                sh "mvn test"
+            }
+        }
+        stage("Empaquetado") {
+            steps {
+                sh "mvn package"
+            }
+        }
+    }
+    post {
+        archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
+        junit 'target/surefire-reports/*.xml'
+        cleanWs deleteDirs: true, patterns: [[pattern: 'target', type: 'INCLUDE']]
+    }
+}
