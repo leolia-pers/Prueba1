@@ -19,7 +19,16 @@ pipeline {
         }
         stage("Empaquetado") {
             steps {
-                sh "mvn package"
+                sh "mvn package -Dmaven.test.skip=true"
+            }
+        }
+        stage("SonarQube") {
+            steps {
+                sh """
+                mvn sonar:sonar \
+                -Dsonar.host.url=http:\\172.31.4.141:8081 \
+                -Dsonar.login=62ae97410457fcefbab1ecb1f8154158bc62bd80 \
+                """
             }
         }
     }

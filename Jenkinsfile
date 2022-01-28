@@ -1,21 +1,51 @@
 pipeline {
+    
     agent any
     
     stages {
-        stage("Etapa unica") {
-            steps {
-                sh "mvn compile"
-                sh "mvn test-compile"
-                sh "mvn test"
-                sh "mvn package"
-            }
-            post {
-                always {
-                    archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
-                    junit 'target/surefire-reports/*.xml'
-                    cleanWs deleteDirs: true, patterns: [[pattern: 'target', type: 'INCLUDE']]
+        stage("Compilación") {
+            
+        }
+        stage("Pruebas") {
+            stages {
+                stage("Pruebas Dinámicas") {
+                    stages {
+                        stage("Compilación pruebas") {
+                            steps {
+                                // Compilar pruebas -> Las pruebas no pueden ejecutarse
+                            }
+                        }
+                        stage("Ejecución pruebas") {
+                            steps {
+                                // Ejecutar pruebas -> Genera informe... tanto si se ejecutan bien como si se ejecutan mal
+                            }
+                            post{
+                                always {
+                                    // Guardar el informe de pruebas <- 
+                                }    
+                            }
+                        }
+                    }
+                }
+               stage("SonarQube") {
+                    // Sonarqube
                 }
             }
+        }
+        stage("Empaquetado") {
+            steps {
+                // Empaquetar
+            }
+            post{
+                success {
+                    // Guardar el artefacto (resultante del empaquetado)
+                }
+            }
+        }
+    }
+    post {
+        always {
+            // Borrar el espacio de trabajo
         }
     }
 }
